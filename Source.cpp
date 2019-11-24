@@ -1,36 +1,54 @@
 #include <iostream>
 
 using namespace std;
-void bank(int& balance);
-void bankPointer(int* balance);
+void addInterest(int* balance);
+void messageBasedOnBalance(int* balance, string* message);
 
 int main()
 {
-	/**cout << "\t\tPointer test" << endl;
+	//Initializes the balance and message variables
+	int balance;
+	string message;
 
-	int age = 21;
-	int* page = &age;
+	//Creates pointers based on the variables
+	int* pointerBalance = &balance;
+	string* pointerMessage = &message;
 
-	cout << "The value of 'age' is " << *page << endl;
-	**/
 
-	int balance = 300;
-
-	bank(balance);
-
-	cout << "Balance = " << balance;
-
-	bankPointer(&balance);
+	cout << "\t\t***Welcome to Your Simple Bank***" << endl << endl;
 	
-	cout << "Balance = " << balance;
+	//User enters in their balance
+	cout << "Current Balance: ";
+	cin >> balance;
+	cout << endl;
+
+	//Functions pass in the pointers
+	addInterest(pointerBalance);
+	messageBasedOnBalance(pointerBalance, pointerMessage);
+	
+	cout << "Balance After Interest: " << balance << endl << message << endl;
+	return 0;
 }
 
-void bank(int& balance)
+//Adds interest to the balance
+void addInterest(int* balance)
 {
-	balance = 500;
+	cout << "Adding Interest..." << endl;
+	//How interest is determined can be changed here
+	*balance += *balance / 3;
 }
 
-void bankPointer(int* balance)
+//Outputs a message based on the amount of money in the balance
+void messageBasedOnBalance(int* balance, string* message)
 {
-	*balance = 900;
+	if (*balance > 900)
+	{
+		*message = "Congratulations! You qualify for our latest Big Spenders deal!";
+	}
+
+	else
+	{
+		*message = "Sorry, you don't qualify for any of our deals going on right now";
+	}
+
 }
